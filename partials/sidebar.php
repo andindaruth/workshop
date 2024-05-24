@@ -48,6 +48,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="users.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                User management
+              </p>
+            </a>
+          </li>
           
         </ul>
       </nav>

@@ -1,88 +1,75 @@
+<?php
+// Include the database connection
+include 'config.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve the form data
+    $name = $_POST['name'];
+    $department = $_POST['department'];
+    $position = $_POST['position'];
+
+    // Insert the new person into the database
+    $sql = "INSERT INTO people (name, department, position) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $name, $department, $position);
+    $stmt->execute();
+
+    // Redirect to the people list page
+    header("Location: people.php");
+    exit();
+}
+?>
+
 <?php include 'partials/head.php'; ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <?php include 'partials/navbar.php'; ?>
         <?php include 'partials/sidebar.php'; ?>
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper mi-bg">
-            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                <div class="row mb-2">
+                    <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Add new Person</h1>
-                        </div><!-- /.col -->
+                            <h1 class="m-0">Add New Person</h1>
+                        </div>
                         <div class="col-sm-6">
-                            <a href="people.php" class="btn float-right bg-success"></i> People
-                            </a>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                            <ol class="breadcrumb float-sm-right">
+                            </ol>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.content-header -->
-
-           <!-- Main content -->
-           <div class="content">
+            <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                       <div class="col-sm-12">
-                            <form action="loan_appraisal.php" enctype="multipart/form-data">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label style="font-weight: normal;" for="amount">Name</label>
-                                                    <input name="amount" type="text" class="form-control" value="">
-                                                </div>
-                                            </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="new-person.php" method="POST">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" required>
                                         </div>
-                            
-                                          <div class="row">
-
-                                           <div class="col-md-6">
-                                           <div class="form-group">
-                                                    <label style="font-weight: normal;" for="amount">Department</label>
-                                                    <input name="amount" type="text" class="form-control" value="">
-                                                </div>
-                                            </div>
-                                          </div>
-
-                                            <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label style="font-weight: normal;" for="amount">Postion</label>
-                                                    <input name="amount" type="text" class="form-control" value="">
-                                                </div>
-                                            </div>
-                                           </div>
-
-                                           
-</div>
-                                        
+                                        <div class="form-group">
+                                            <label for="department">Department</label>
+                                            <input type="text" class="form-control" id="department" name="department" required>
                                         </div>
-                                        
-                                        
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer">
-                                        <div class="card-tools text-right">
-                                            <button name="submit" type="submit" class="btn btn-success">Save person</button>
+                                        <div class="form-group">
+                                            <label for="position">Position</label>
+                                            <input type="text" class="form-control" id="position" name="position" required>
                                         </div>
-                                    </div>
+                                        <button type="submit" class="btn btn-success">Save Person</button>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
-                    </div><!-- /.main-row -->
+                    </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </section>
         </div>
-        <!-- /.content -->
+        <?php include 'partials/footer.php'; ?>
     </div>
-    <!-- /.content-wrapper -->
-    <?php include 'partials/footer.php'; ?>
-    </div>
-    <!-- ./wrapper -->
     <?php include 'partials/foot.php'; ?>
+</body>
+</html>

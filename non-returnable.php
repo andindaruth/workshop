@@ -4,42 +4,33 @@
     <div class="wrapper">
         <?php include 'partials/navbar.php'; ?>
         <?php include 'partials/sidebar.php'; ?>
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper mi-bg">
-            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Non Returnable items</h1>
-                        </div><!-- /.col -->
+                            <h1 class="m-0">Non-Returnable items</h1>
+                        </div>
                         <div class="col-sm-6">
-                            <a href="taken-non-returnable.php" class="btn float-right bg-success"></i> Taken items
-                            </a>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                            <a href="taken-non-returnable.php" class="btn float-right bg-success">Taken items</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- filter -->
                         <div class="col-sm-12">
                             <div class="card">
-                                <!-- /.card-header -->
                                 <div class="card-body pb-1">
-                                    <form action="enhanced-results.html">
+                                    <form action="non-returnable.php" method="GET">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <div class="form-group">
-                                                            <div class="input-group ">
-                                                                <input type="search" class="form-control form-control-md" placeholder="Enter Name" value="">
-
+                                                            <div class="input-group">
+                                                                <input type="search" class="form-control form-control-md" name="search" placeholder="Enter Name" value="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -49,20 +40,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
                         </div>
-                        <!-- filter -->
                         <div class="col-sm-12">
                             <div class="card">
-                               
-                                <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover table-head-fixed">
                                         <thead>
@@ -70,40 +55,43 @@
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
-                                                
                                                 <th>Quantity</th>
-                                            <th>Action </th>
+                                                <th>Action</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Img1</td>
-                                                
-                                                <td>Washer</td>
-                                                <td>Screws metals together</td>
-                                                
-                                                <td><b>6</b></td>
-                                                <td><a href ="give-out.php">Give out</a></td>
-                                                <td><a href ="add-qty.php">Add quantity</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Img2</td>
-                                                
-                                                <td>Screw driver</td>
-                                                <td>Fixed screws</td>
-                                                
-                                                <td><b>7</b></td>
-                                               
-                                                <td><a href ="give-out.php">Give out</a></td>
-                                                <td><a href ="add-qty.php">Add quantity</a></td>
-                                            </tr>
+                                            <?php
+                                            // Database connection
+                                            $conn = new mysqli('localhost', 'root', '', 'workshop');
 
+                                            if ($conn->connect_error) {
+                                                die('Connection failed: ' . $conn->connect_error);
+                                            }
 
+                                            $sql = "SELECT * FROM items WHERE category != 'returnable'";
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) {
+                                                    echo "<tr>";
+                                                    echo "<td><img src='" . $row['image'] . "' alt='Image' style='width:50px; height:50px;'></td>";
+                                                    echo "<td>" . $row['name'] . "</td>";
+                                                    echo "<td>" . $row['description'] . "</td>";
+                                                    echo "<td><b>" . $row['quantity'] . "</b></td>";
+                                                    echo "<td><a href ='give-out.php?id=" . $row['id'] . "'>Give out</a></td>";
+                                                    echo "<td><a href ='add-qty.php?id=" . $row['id'] . "'>Add quantity</a></td>";
+                                                    echo "</tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='6'>No non-returnable items found</td></tr>";
+                                            }
+
+                                            $conn->close();
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /.card-body -->                            
                             </div>
                             <div class="pb-2">
                                 <nav aria-label="Contacts Page Navigation">
@@ -120,19 +108,12 @@
                                 </nav>
                             </div>
                         </div>
-                        <!-- /.card-body -->
-
                     </div>
-                    <!-- /.card -->
                 </div>
-        </div><!-- /.main-row -->
-
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+            </section>
+        </div>
+        <?php include 'partials/footer.php'; ?>
     </div>
-    <!-- /.content-wrapper -->
-    <?php include 'partials/footer.php'; ?>
-    </div>
-    <!-- ./wrapper -->
     <?php include 'partials/foot.php'; ?>
+</body>
+</html>
