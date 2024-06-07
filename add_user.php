@@ -1,7 +1,6 @@
 <?php
 // Include the database connection and session start
 include 'config.php';
-session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -68,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="add_user.php" method="POST">
+                                    <form action="" method="POST">
                                         <div class="form-group">
                                             <label for="name">Name</label>
                                             <input type="text" name="name" class="form-control" required>

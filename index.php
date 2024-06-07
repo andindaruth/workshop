@@ -1,7 +1,6 @@
 <?php include 'partials/head.php'; ?>
 <?php include 'config.php'; ?>
 
-
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <?php include 'partials/navbar.php'; ?>
@@ -13,11 +12,10 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Users</h1>
+                            <h1 class="m-0">Returnable items</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
-                            <a href="add_user.php" class="btn float-right bg-success"><i class="fas fa-plus"></i> Add new user
-                            </a>
+                            <a href="taken-returnable.php" class="btn float-right bg-success"> Taken items </a>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -33,15 +31,14 @@
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body pb-1">
-                                    <form action="enhanced-results.html">
+                                    <form action="returnable.php" method="get">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <div class="form-group">
-                                                            <div class="input-group ">
-                                                                <input type="search" class="form-control form-control-md" placeholder="Enter Name" value="">
-
+                                                            <div class="input-group">
+                                                                <input type="search" name="search" class="form-control form-control-md" placeholder="Enter Name" value="">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -51,7 +48,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </form>
@@ -63,25 +59,23 @@
                         <!-- filter -->
                         <div class="col-sm-12">
                             <div class="card">
-                               
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover table-head-fixed">
                                         <thead>
                                             <tr class="text-nowrap">
-                                                
+                                                <th>Image</th>
                                                 <th>Name</th>
-                                                <th>Role</th>
-                                                
-                                                <th>Email</th>
-                                            
+                                                <th>Description</th>
+                                                <th>Quantity</th>
+                                                <th>Action</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
                                             <?php
                                             $search = isset($_GET['search']) ? $_GET['search'] : '';
-                                            $sql = "SELECT * FROM users WHERE name LIKE ?";
+                                            $sql = "SELECT * FROM items WHERE category='returnable' AND name LIKE ?";
                                             $stmt = $conn->prepare($sql);
                                             $search_param = '%' . $search . '%';
                                             $stmt->bind_param("s", $search_param);
@@ -90,9 +84,12 @@
 
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>";
+                                                echo "<td><img src='" . $row['image'] . "' alt='" . $row['name'] . "' class='img-fluid' width='50'></td>";
                                                 echo "<td>" . $row['name'] . "</td>";
-                                                echo "<td>" . $row['role'] . "</td>";
-                                                echo "<td><b>" . $row['email'] . "</b></td>";                                              
+                                                echo "<td>" . $row['description'] . "</td>";
+                                                echo "<td><b>" . $row['quantity'] . "</b></td>";
+                                                echo "<td><a href='give-out.php?id=" . $row['id'] . "'>Give out</a></td>";
+                                                echo "<td><a href='add-qty.php?id=" . $row['id'] . "'>Add quantity</a></td>";
                                                 echo "</tr>";
                                             }
 
@@ -120,18 +117,16 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
-
                     </div>
                     <!-- /.card -->
                 </div>
-        </div><!-- /.main-row -->
-
-    </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <?php include 'partials/footer.php'; ?>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <?php include 'partials/footer.php'; ?>
     </div>
     <!-- ./wrapper -->
     <?php include 'partials/foot.php'; ?>
+</body>
+</html>

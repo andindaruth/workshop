@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('config.php'); // Database connection
 
 // Check if form is submitted
@@ -23,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $id;
         $_SESSION['name'] = $name;
         $_SESSION['role'] = $role;
-        header('Location: dashboard.php'); // Redirect to dashboard
+        header('Location: returnable.php'); // Redirect to dashboard
         exit();
     } else {
         $_SESSION['error'] = 'Invalid email or password';
