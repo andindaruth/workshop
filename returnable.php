@@ -64,6 +64,7 @@
                                     <table class="table table-hover table-head-fixed">
                                         <thead>
                                             <tr class="text-nowrap">
+                                                <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
@@ -84,7 +85,8 @@
 
                                             while ($row = $result->fetch_assoc()) {
                                                 echo "<tr>";
-                                                echo "<td><img src='" . $row['image'] . "' alt='" . $row['name'] . "' class='img-fluid' width='50'></td>";
+                                                echo "<td>" . $row['id'] . "</td>";
+                                                echo "<td><img src='" . $row['image'] . "' alt='" . $row['name'] . "' class='img-fluid' width='40'></td>";
                                                 echo "<td>" . $row['name'] . "</td>";
                                                 echo "<td>" . $row['description'] . "</td>";
                                                 echo "<td><b>" . $row['quantity'] . "</b></td>";

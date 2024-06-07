@@ -52,6 +52,7 @@
                                     <table class="table table-hover table-head-fixed">
                                         <thead>
                                             <tr class="text-nowrap">
+                                            <th>ID</th>
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
@@ -75,6 +76,7 @@
                                             if ($result->num_rows > 0) {
                                                 while($row = $result->fetch_assoc()) {
                                                     echo "<tr>";
+                                                    echo "<td>" . $row['id'] . "</td>";
                                                     echo "<td><img src='" . $row['image'] . "' alt='Image' style='width:50px; height:50px;'></td>";
                                                     echo "<td>" . $row['name'] . "</td>";
                                                     echo "<td>" . $row['description'] . "</td>";
