@@ -12,10 +12,10 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">Recommended for Repair</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                            </ol>
+                            </div><!-- /.col -->
+                          <div class="col-sm-6">
+                            <a href="repaired.php" class="btn float-right bg-success">  <i class="fas fa-redo"></i> Repaired
+                            </a>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->

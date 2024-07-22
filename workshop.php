@@ -62,6 +62,7 @@
                                                 <th>Description</th>
                                                 <th>Re-order Value</th>
                                                 <th>Quantity in stock</th>
+                                                <th>Comment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -70,7 +71,8 @@
                                                 <td>Spanner</td>
                                                 <td>Used for screwing</td>
                                                 <td>3</td>
-                                                <td>5</td>                                               
+                                                <td>5</td>
+                                                <td>Need to re-order soon</td>                                               
                                             </tr>
                                         </tbody>
                                     </table>

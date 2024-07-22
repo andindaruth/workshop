@@ -70,7 +70,7 @@
                                                 <td>5</td>
                                                 <td><a href ="give.php">Give out</a></td> 
                                                 <td><a href ="add.php">Add Qty</a></td> 
-                                                <td><a href ="repair.php">Need Repair</a></td> 
+                                                <td><a href ="for_repair.php">Need Repair</a></td> 
                                                 <td><a href ="dispose.php">Dispose</a></td> 
                                             </tr>
                                         </tbody>

@@ -101,6 +101,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="general.php" class="nav-link">
+            <i class="fas fa-clipboard-list"></i>
+              <p>
+                General Report of all items taken
+              </p>
+            </a>
+          </li>
             
           </li>
         </ul>
