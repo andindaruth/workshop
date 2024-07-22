@@ -1,41 +1,4 @@
 <?php include 'partials/head.php'; ?>
-<?php include 'config.php'; ?>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $description = $_POST['description'];
-    $category = $_POST['category'];
-    $quantity = $_POST['quantity'];
-    $image = '';
-
-    // Handling image upload
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $imageName = basename($_FILES["image"]["name"]);
-        $target_dir = "uploads/";
-        $target_file = $target_dir . $imageName;
-
-        // Save the file to the server
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image = $target_file;
-        }
-    }
-
-    // Insert into the database
-    $sql = "INSERT INTO items (name, description, category, image, quantity) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $name, $description, $category, $image, $quantity);
-
-    if ($stmt->execute()) {
-        $success_message = "Item saved successfully.";
-    } else {
-        $error_message = "Error saving item: " . $conn->error;
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -48,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">New Item</h1>
+                            <h1 class="m-0">Create new Item/Tool/SparePart</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -64,73 +27,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form action="new-item.php" method="post" enctype="multipart/form-data">
+                            <form action="loan_appraisal.php" enctype="multipart/form-data">
                                 <div class="card">
                                     <div class="card-body">
-                                        <?php
-                                        if (!empty($success_message)) {
-                                            echo '<div class="alert alert-success">' . $success_message . '</div>';
-                                        }
-                                        if (!empty($error_message)) {
-                                            echo '<div class="alert alert-danger">' . $error_message . '</div>';
-                                        }
-                                        ?>
+
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: normal;" for="name">Name</label>
-                                                    <input name="name" type="text" class="form-control" required>
+                                                    <label style="font-weight: normal;" for="amount">Name</label>
+                                                    <input name="amount" type="text" class="form-control" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label style="font-weight: normal;" for="amount">Category 1</label>
+                                                   <select> <option>Item</option>
+                                                    <option>Tool</option>
+                                                    <option>Spare Part</option> </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label style="font-weight: normal;" for="amount">Category 2</label>
+                                                   <select> <option>Returnable</option>
+                                                    <option>Non Returnable</option></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label style="font-weight: normal;" for="amount">Category 3</label>
+                                                   <select> <option>Workshop</option>
+                                                    <option>Farm</option></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: normal;" for="amount">Description or Purpose</label>
+                                                    <input name="amount" type="text" class="form-control" value="">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: normal;" for="category">Category</label>
-                                                    <select name="category" class="form-control" required>
-                                                        <option value="returnable">Returnable</option>
-                                                        <option value="nonreturnable">Non-Returnable</option>
-                                                    </select>
+                                                    <label style="font-weight: normal;" for="amount">Quantity in Stock</label>
+                                                    <input name="amount" type="text" class="form-control" value="">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: normal;" for="description">Description</label>
-                                                    <input name="description" type="text" class="form-control" required>
+                                                    <label style="font-weight: normal;" for="amount">Re-order value</label>
+                                                    <input name="amount" type="text" class="form-control" value="">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: normal;" for="quantity">Quantity in stock</label>
-                                                    <input name="quantity" type="number" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label style="font-weight: normal;" for="image">Image</label><br/>
+                                                    <label style="font-weight: normal;" for="amount">Image</label>
                                                     <input type="file" name="image" id="imageInput" accept="image/*" class="form-control">
                                                     <div class="image-preview" id="imagePreview">
                                                         <p>No image selected</p>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer">
-                                        <div class="card-tools text-right">
-                                            <button name="submit" type="submit" class="btn btn-success">Save item</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <script>
+                                        <script>
                                 document.getElementById('imageInput').addEventListener('change', function(event) {
                                     const file = event.target.files[0];
                                     if (file) {
@@ -145,6 +116,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     }
                                 });
                             </script>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <div class="card-tools text-right">
+                                            <button name="submit" type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div><!-- /.main-row -->
                 </div>
@@ -157,5 +137,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <!-- ./wrapper -->
     <?php include 'partials/foot.php'; ?>
-</body>
-</html>

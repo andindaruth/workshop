@@ -1,5 +1,4 @@
 <?php include 'partials/head.php'; ?>
-<?php include 'config.php'; ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -12,11 +11,14 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Returnable items</h1>
+                            <h1 class="m-0">Disposed Equipement</h1>
                         </div><!-- /.col -->
+                        
                         <div class="col-sm-6">
-                            <a href="taken-returnable.php" class="btn float-right bg-success"> Taken items </a>
+                            <a href="repaired.php" class="btn float-right bg-success"> <i class="fas fa-exclamation-triangle"></i>Repaired
+                            </a>
                         </div><!-- /.col -->
+                      
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -26,19 +28,21 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        
                         <!-- filter -->
                         <div class="col-sm-12">
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body pb-1">
-                                    <form action="returnable.php" method="get">
+                                    <form action="enhanced-results.html">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <div class="form-group">
-                                                            <div class="input-group">
-                                                                <input type="search" name="search" class="form-control form-control-md" placeholder="Enter Name" value="">
+                                                            <div class="input-group ">
+                                                                <input type="search" class="form-control form-control-md" placeholder="Search by Item or Person Name" value="">
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -48,54 +52,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                        <!-- filter -->
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
+                                                <div class="card-body table-responsive p-0">
                                     <table class="table table-hover table-head-fixed">
                                         <thead>
                                             <tr class="text-nowrap">
+                                                <th>Date repaired</th>
                                                 <th>Image</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Quantity</th>
-                                                <th>Action</th>
-                                                <th>Action</th>
+                                                <th>Name</th>                                   
+                                                <th>Reason for Disposal</th>
+                                               
+                                                <th>Disposed By</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $search = isset($_GET['search']) ? $_GET['search'] : '';
-                                            $sql = "SELECT * FROM items WHERE category='returnable' AND name LIKE ?";
-                                            $stmt = $conn->prepare($sql);
-                                            $search_param = '%' . $search . '%';
-                                            $stmt->bind_param("s", $search_param);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<tr>";
-                                                echo "<td><img src='" . $row['image'] . "' alt='" . $row['name'] . "' class='img-fluid' width='50'></td>";
-                                                echo "<td>" . $row['name'] . "</td>";
-                                                echo "<td>" . $row['description'] . "</td>";
-                                                echo "<td><b>" . $row['quantity'] . "</b></td>";
-                                                echo "<td><a href='give-out.php?id=" . $row['id'] . "'>Give out</a></td>";
-                                                echo "<td><a href='add-qty.php?id=" . $row['id'] . "'>Add quantity</a></td>";
-                                                echo "</tr>";
-                                            }
-
-                                            $stmt->close();
-                                            $conn->close();
-                                            ?>
+                                            <tr>
+                                                <td>27/17/2024</td>
+                                                <td>Img</td>
+                                                <td>Spanner</td>  
+                                                <td>Cant work</td> 
+                                                                                        
+                                                <td>Andinda Ruth</td> 
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -117,9 +94,18 @@
                             </div>
                         </div>
                         <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- filter -->
+
+                    </div><!-- /.main-row -->
+                </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
         </div>
@@ -128,5 +114,3 @@
     </div>
     <!-- ./wrapper -->
     <?php include 'partials/foot.php'; ?>
-</body>
-</html>

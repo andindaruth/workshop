@@ -11,14 +11,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Return Item</h1>
+                            <h1 class="m-0">Recommended for Repair</h1>
                         </div><!-- /.col -->
-                        
                         <div class="col-sm-6">
-                            <a href="unreturned.php" class="btn float-right bg-success"> <i class="fas fa-redo"></i>Return another Item
-                            </a>
+                            <ol class="breadcrumb float-sm-right">
+                            </ol>
                         </div><!-- /.col -->
-                      
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -44,7 +42,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: normal;" for="amount">Quantity pending return</label>
+                                                    <label style="font-weight: normal;" for="amount">Quantity to be repaired</label>
                                                     <input name="amount" type="text" class="form-control" value="">
                                                 </div>
                                             </div>
@@ -52,7 +50,23 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label style="font-weight: normal;" for="amount">Quantity brought</label>
+                                                    <label style="font-weight: normal;" for="amount">Quantity repaired</label>
+                                                    <input name="amount" type="text" class="form-control" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: normal;" for="amount">Repaired By</label>
+                                                    <input name="amount" type="text" class="form-control" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label style="font-weight: normal;" for="amount">Actions taken</label>
                                                     <input name="amount" type="text" class="form-control" value="">
                                                 </div>
                                             </div>
